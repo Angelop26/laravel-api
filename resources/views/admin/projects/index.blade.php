@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('partials.session_message')
+
 <h1>Lista Project</h1> 
+<a href="{{route('admin.projects.create')}}" class="btn btn-success ">create</a>
 
 <table class="table">
     <thead>
@@ -20,7 +23,13 @@
           <td> {{$project->slug}} </td>
           <td> {{$project->content}} </td>
           <td>
-            <a href="{{route('admin.projects.show', $project->slug)}}" class="btn btn-succes">details</a>
+            <a href="{{route('admin.projects.show', $project->slug)}}" class="btn btn-success">details</a>
+            <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn btn-warning">edit</a>
+            <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">del</button>
+            </form>
           </td>
         </tr>
         @endforeach

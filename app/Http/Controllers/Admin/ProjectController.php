@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -26,7 +29,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -35,9 +38,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        $project = Project::create($data);
+        return redirect()->route('admin.projects.index')->with('message', "{$project->title} è stato creato");
     }
 
     /**
@@ -59,7 +65,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -69,9 +75,12 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        $project->update($data);
+        return redirect()->route('admin.projects.index')->with('message', "{$project->title} è stato modificato");
     }
 
     /**
@@ -82,6 +91,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+       $project->delete(); 
+        return redirect()->route('admin.projects.index')->with('message', "il progetto {$project->title} è stato eliminato");
     }
 }

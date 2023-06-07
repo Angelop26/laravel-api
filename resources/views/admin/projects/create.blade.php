@@ -13,6 +13,19 @@
             
         @enderror
     </div>
+
+    <div class="mb-3">
+        <label for="type">type</label>
+        <select class="form-select" aria-label="Default select example" id="type" name="type_id" >
+            
+            <option value=""></option>
+            @foreach ($types as $type)
+                <option @selected(old('type_id') == $type->id)  value="{{$type->id}}"> {{$type->name}} </option>
+            @endforeach
+            
+        </select>
+    </div>
+
     <div class="mb-3">
         <label for="content" class="form-label">content</label>
         <textarea class="form-control" value="{{old('content')}}" id="content" name='content' rows="3" ></textarea>

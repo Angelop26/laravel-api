@@ -6,4 +6,5 @@
         {{$project->slug}}
     </div>
     <p>{{$project->content}}</p>
+    <p>tipo progetto:{{$project->type?->name}}</p>
 @endsection

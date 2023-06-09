@@ -47,7 +47,9 @@ class ProjectController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['title']);
         $project = Project::create($data);
-        $project->technologies()->attach($data['id']);
+        if ($request->has('tags')) {
+            $project->technologies()->attach($data['tags']);
+        }
         return redirect()->route('admin.projects.index')->with('message', "{$project->title} è stato creato");
     }
 

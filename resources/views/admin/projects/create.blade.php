@@ -29,8 +29,8 @@
     <div class="mb-3">
         @foreach ($technologies as $technology)
 
-        <label for="{{$technology->name}}">{{$technology->name}}</label>
-        <input type="checkbox" name="id[]" id="{{$technology->id}}" value="{{$technology->id}}">
+        <label for="tag-{{$technology->id}}">{{$technology->name}}</label>
+        <input type="checkbox" name="tags[]" id="tag-{{$technology->id}}" value="{{$technology->id}}">
         
         @endforeach
     </div>

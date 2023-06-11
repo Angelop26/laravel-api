@@ -29,8 +29,8 @@
     <div class="mb-3">
         @foreach ($technologies as $technology)
 
-        <label for="tag-{{$technology->id}}">{{$technology->name}}</label>
-        <input type="checkbox" name="tags[]" id="tag-{{$technology->id}}" value="{{$technology->id}}">
+        <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+        <input type="checkbox" name="technologies[]" id="technology-{{$technology->id}}" value="{{$technology->id}}" @checked(in_array($technology->id, old('technologies',[])))>
         
         @endforeach
     </div>

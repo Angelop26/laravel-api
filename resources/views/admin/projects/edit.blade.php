@@ -20,6 +20,15 @@
             
         </select>
     </div>
+
+    <div class="mb-3">
+        @foreach ($technologies as $technology)
+
+        <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+        <input type="checkbox" name="technologies[]" id="technology-{{$technology->id}}" value="{{$technology->id}}" @checked(old('technologies') ? in_array($technology->id,old('technologies',[])) : $project->technologies->contains($technology) )>
+        
+        @endforeach
+    </div>
     
     <div class="mb-3">
         <label for="content" class="form-label">content</label>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ProjectController;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::get('/homeapi', [ProjectController::class, 'index']);
+Route::get('/homeapi/{slug}',[ProjectController::class, 'show']);
